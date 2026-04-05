@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "backs",
+  "info": {
+    "singularName": "back",
+    "pluralName": "backs",
+    "displayName": "Back"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "color": {
+      "type": "string",
+      "default": "white"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}

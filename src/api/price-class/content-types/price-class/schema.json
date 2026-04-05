@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "price_classes",
+  "info": {
+    "singularName": "price-class",
+    "pluralName": "price-classes",
+    "displayName": "Price Class"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "level": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fronts",
+  "info": {
+    "singularName": "front",
+    "pluralName": "fronts",
+    "displayName": "Front"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "description": {
+      "type": "text"
+    },
+    "priceClass": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::price-class.price-class"
+    }
+  }
+}

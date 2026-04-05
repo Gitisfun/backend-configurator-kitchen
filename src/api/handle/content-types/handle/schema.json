@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "handles",
+  "info": {
+    "singularName": "handle",
+    "pluralName": "handles",
+    "displayName": "Handle"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "color": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "hasHold": {
+      "type": "boolean",
+      "default": false
+    },
+    "position": {
+      "type": "integer",
+      "default": 0
+    },
+    "handlePosition": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::handle-position.handle-position"
+    }
+  }
+}
