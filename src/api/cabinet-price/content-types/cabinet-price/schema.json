@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_prices",
+  "info": {
+    "singularName": "cabinet-price",
+    "pluralName": "cabinet-prices",
+    "displayName": "Cabinet Price"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "cabinetVariant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-variant.cabinet-variant",
+      "inversedBy": "prices"
+    },
+    "priceClass": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::price-class.price-class"
+    }
+  }
+}

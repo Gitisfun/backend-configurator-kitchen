@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_accessories",
+  "info": {
+    "singularName": "cabinet-accessory",
+    "pluralName": "cabinet-accessories",
+    "displayName": "Cabinet Accessory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "cabinetTypes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cabinet-type.cabinet-type",
+      "inversedBy": "accessories"
+    }
+  }
+}

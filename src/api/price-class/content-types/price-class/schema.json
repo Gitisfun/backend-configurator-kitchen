@@ -18,6 +18,9 @@
     "level": {
       "type": "integer",
       "required": true
+    },
+    "priceIndex": {
+      "type": "integer"
     }
   }
 }

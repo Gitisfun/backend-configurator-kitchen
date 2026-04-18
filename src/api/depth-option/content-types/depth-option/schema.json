@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "depth_options",
+  "info": {
+    "singularName": "depth-option",
+    "pluralName": "depth-options",
+    "displayName": "Depth Option"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "depth": {
+      "type": "integer",
+      "required": true
+    },
+    "surchargeCode": {
+      "type": "string"
+    },
+    "surchargeAmount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false
+    },
+    "cabinetType": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-type.cabinet-type",
+      "inversedBy": "depthOptions"
+    }
+  }
+}

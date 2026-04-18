@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_types",
+  "info": {
+    "singularName": "cabinet-type",
+    "pluralName": "cabinet-types",
+    "displayName": "Cabinet Type"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "orderNumberPrefix": {
+      "type": "string"
+    },
+    "hasLeftRight": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasInternalPanel": {
+      "type": "boolean",
+      "default": false
+    },
+    "depthSurchargeCode": {
+      "type": "string"
+    },
+    "subcategory": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subcategory.subcategory"
+    },
+    "cabinetSeries": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-serie.cabinet-serie"
+    },
+    "accessories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cabinet-accessory.cabinet-accessory",
+      "mappedBy": "cabinetTypes"
+    },
+    "variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cabinet-variant.cabinet-variant",
+      "mappedBy": "cabinetType"
+    },
+    "depthOptions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::depth-option.depth-option",
+      "mappedBy": "cabinetType"
+    },
+    "typeSurcharges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cabinet-type-surcharge.cabinet-type-surcharge",
+      "mappedBy": "cabinetType"
+    }
+  }
+}

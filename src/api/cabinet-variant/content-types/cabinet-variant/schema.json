@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_variants",
+  "info": {
+    "singularName": "cabinet-variant",
+    "pluralName": "cabinet-variants",
+    "displayName": "Cabinet Variant"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "width": {
+      "type": "integer",
+      "required": true
+    },
+    "isVariableWidth": {
+      "type": "boolean",
+      "default": false
+    },
+    "minWidth": {
+      "type": "integer"
+    },
+    "maxWidth": {
+      "type": "integer"
+    },
+    "height": {
+      "type": "integer"
+    },
+    "cabinetType": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-type.cabinet-type",
+      "inversedBy": "variants"
+    },
+    "prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cabinet-price.cabinet-price",
+      "mappedBy": "cabinetVariant"
+    }
+  }
+}

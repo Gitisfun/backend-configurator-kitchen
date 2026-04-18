@@ -29,6 +29,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::subcategory.subcategory"
+    },
+    "cabinetSeries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cabinet-serie.cabinet-serie",
+      "mappedBy": "subcategory"
     }
   }
 }

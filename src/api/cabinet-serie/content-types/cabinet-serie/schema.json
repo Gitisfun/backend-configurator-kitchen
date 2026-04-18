@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_series",
+  "info": {
+    "singularName": "cabinet-serie",
+    "pluralName": "cabinet-series",
+    "displayName": "Cabinet Series"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "carcaseHeight": {
+      "type": "integer",
+      "required": true
+    },
+    "defaultCarcaseDepth": {
+      "type": "integer",
+      "default": 560
+    },
+    "productLine": {
+      "type": "enumeration",
+      "enum": ["standard", "cLine", "xLine"]
+    },
+    "subcategory": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subcategory.subcategory",
+      "inversedBy": "cabinetSeries"
+    }
+  }
+}

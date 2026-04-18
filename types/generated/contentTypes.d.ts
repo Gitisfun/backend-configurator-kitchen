@@ -458,6 +458,258 @@ export interface ApiBackBack extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCabinetAccessoryCabinetAccessory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_accessories';
+  info: {
+    displayName: 'Cabinet Accessory';
+    pluralName: 'cabinet-accessories';
+    singularName: 'cabinet-accessory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetTypes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::cabinet-type.cabinet-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-accessory.cabinet-accessory'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCabinetPriceCabinetPrice
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_prices';
+  info: {
+    displayName: 'Cabinet Price';
+    pluralName: 'cabinet-prices';
+    singularName: 'cabinet-price';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetVariant: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-variant.cabinet-variant'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-price.cabinet-price'
+    > &
+      Schema.Attribute.Private;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceClass: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::price-class.price-class'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCabinetSerieCabinetSerie
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_series';
+  info: {
+    displayName: 'Cabinet Series';
+    pluralName: 'cabinet-series';
+    singularName: 'cabinet-serie';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    carcaseHeight: Schema.Attribute.Integer & Schema.Attribute.Required;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    defaultCarcaseDepth: Schema.Attribute.Integer &
+      Schema.Attribute.DefaultTo<560>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-serie.cabinet-serie'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    productLine: Schema.Attribute.Enumeration<['standard', 'cLine', 'xLine']>;
+    publishedAt: Schema.Attribute.DateTime;
+    subcategory: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::subcategory.subcategory'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCabinetTypeSurchargeCabinetTypeSurcharge
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_type_surcharges';
+  info: {
+    displayName: 'Cabinet Type Surcharge';
+    pluralName: 'cabinet-type-surcharges';
+    singularName: 'cabinet-type-surcharge';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetType: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type.cabinet-type'
+    >;
+    code: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge.cabinet-type-surcharge'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCabinetTypeCabinetType extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_types';
+  info: {
+    displayName: 'Cabinet Type';
+    pluralName: 'cabinet-types';
+    singularName: 'cabinet-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    accessories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::cabinet-accessory.cabinet-accessory'
+    >;
+    cabinetSeries: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-serie.cabinet-serie'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    depthOptions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::depth-option.depth-option'
+    >;
+    depthSurchargeCode: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    hasInternalPanel: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    hasLeftRight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type.cabinet-type'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    orderNumberPrefix: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    subcategory: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::subcategory.subcategory'
+    >;
+    typeSurcharges: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge.cabinet-type-surcharge'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    variants: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-variant.cabinet-variant'
+    >;
+  };
+}
+
+export interface ApiCabinetVariantCabinetVariant
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_variants';
+  info: {
+    displayName: 'Cabinet Variant';
+    pluralName: 'cabinet-variants';
+    singularName: 'cabinet-variant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetType: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type.cabinet-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    height: Schema.Attribute.Integer;
+    isVariableWidth: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-variant.cabinet-variant'
+    > &
+      Schema.Attribute.Private;
+    maxWidth: Schema.Attribute.Integer;
+    minWidth: Schema.Attribute.Integer;
+    orderNumber: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    prices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-price.cabinet-price'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    width: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -480,6 +732,42 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDepthOptionDepthOption extends Struct.CollectionTypeSchema {
+  collectionName: 'depth_options';
+  info: {
+    displayName: 'Depth Option';
+    pluralName: 'depth-options';
+    singularName: 'depth-option';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetType: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type.cabinet-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    depth: Schema.Attribute.Integer & Schema.Attribute.Required;
+    isDefault: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::depth-option.depth-option'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    surchargeAmount: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    surchargeCode: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -637,6 +925,7 @@ export interface ApiPriceClassPriceClass extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    priceIndex: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -655,6 +944,10 @@ export interface ApiSubcategorySubcategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cabinetSeries: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-serie.cabinet-serie'
+    >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1190,7 +1483,14 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::back.back': ApiBackBack;
+      'api::cabinet-accessory.cabinet-accessory': ApiCabinetAccessoryCabinetAccessory;
+      'api::cabinet-price.cabinet-price': ApiCabinetPriceCabinetPrice;
+      'api::cabinet-serie.cabinet-serie': ApiCabinetSerieCabinetSerie;
+      'api::cabinet-type-surcharge.cabinet-type-surcharge': ApiCabinetTypeSurchargeCabinetTypeSurcharge;
+      'api::cabinet-type.cabinet-type': ApiCabinetTypeCabinetType;
+      'api::cabinet-variant.cabinet-variant': ApiCabinetVariantCabinetVariant;
       'api::category.category': ApiCategoryCategory;
+      'api::depth-option.depth-option': ApiDepthOptionDepthOption;
       'api::front.front': ApiFrontFront;
       'api::handle-position.handle-position': ApiHandlePositionHandlePosition;
       'api::handle.handle': ApiHandleHandle;
