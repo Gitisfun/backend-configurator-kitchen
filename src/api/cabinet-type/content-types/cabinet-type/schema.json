@@ -61,9 +61,9 @@
     },
     "depthOptions": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::depth-option.depth-option",
-      "mappedBy": "cabinetType"
+      "mappedBy": "cabinetTypes"
     },
     "typeSurcharges": {
       "type": "relation",

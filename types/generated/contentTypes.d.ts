@@ -543,15 +543,14 @@ export interface ApiCabinetSerieCabinetSerie
     draftAndPublish: true;
   };
   attributes: {
-    carcaseHeight: Schema.Attribute.Integer & Schema.Attribute.Required;
+    carcaseHeight: Schema.Attribute.Integer;
     code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    defaultCarcaseDepth: Schema.Attribute.Integer &
-      Schema.Attribute.DefaultTo<560>;
+    defaultCarcaseDepth: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -629,7 +628,7 @@ export interface ApiCabinetTypeCabinetType extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     depthOptions: Schema.Attribute.Relation<
-      'oneToMany',
+      'manyToMany',
       'api::depth-option.depth-option'
     >;
     depthSurchargeCode: Schema.Attribute.String;
@@ -749,8 +748,8 @@ export interface ApiDepthOptionDepthOption extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    cabinetType: Schema.Attribute.Relation<
-      'manyToOne',
+    cabinetTypes: Schema.Attribute.Relation<
+      'manyToMany',
       'api::cabinet-type.cabinet-type'
     >;
     createdAt: Schema.Attribute.DateTime;

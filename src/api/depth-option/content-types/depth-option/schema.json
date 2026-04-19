@@ -30,9 +30,9 @@
       "type": "boolean",
       "default": false
     },
-    "cabinetType": {
+    "cabinetTypes": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::cabinet-type.cabinet-type",
       "inversedBy": "depthOptions"
     }

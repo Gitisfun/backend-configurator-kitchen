@@ -21,12 +21,10 @@
       "unique": true
     },
     "carcaseHeight": {
-      "type": "integer",
-      "required": true
+      "type": "integer"
     },
     "defaultCarcaseDepth": {
-      "type": "integer",
-      "default": 560
+      "type": "integer"
     },
     "productLine": {
       "type": "enumeration",
