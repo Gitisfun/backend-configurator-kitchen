@@ -19,15 +19,18 @@
       "type": "string",
       "required": true
     },
-    "price": {
-      "type": "decimal",
-      "required": true
+    "dimension": {
+      "type": "enumeration",
+      "enum": ["height", "width", "depth"]
     },
-    "cabinetType": {
+    "value": {
+      "type": "decimal"
+    },
+    "links": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::cabinet-type.cabinet-type",
-      "inversedBy": "typeSurcharges"
+      "relation": "oneToMany",
+      "target": "api::cabinet-type-surcharge-link.cabinet-type-surcharge-link",
+      "mappedBy": "surcharge"
     }
   }
 }

@@ -544,6 +544,7 @@ export interface ApiCabinetSerieCabinetSerie
   };
   attributes: {
     carcaseHeight: Schema.Attribute.Integer;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -570,6 +571,83 @@ export interface ApiCabinetSerieCabinetSerie
   };
 }
 
+export interface ApiCabinetTypeSurchargeLinkCabinetTypeSurchargeLink
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_type_surcharge_links';
+  info: {
+    displayName: 'Cabinet Type Surcharge Link';
+    pluralName: 'cabinet-type-surcharge-links';
+    singularName: 'cabinet-type-surcharge-link';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cabinetType: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type.cabinet-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge-link.cabinet-type-surcharge-link'
+    > &
+      Schema.Attribute.Private;
+    prices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge-price.cabinet-type-surcharge-price'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    surcharge: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type-surcharge.cabinet-type-surcharge'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCabinetTypeSurchargePriceCabinetTypeSurchargePrice
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'cabinet_type_surcharge_prices';
+  info: {
+    displayName: 'Cabinet Type Surcharge Price';
+    pluralName: 'cabinet-type-surcharge-prices';
+    singularName: 'cabinet-type-surcharge-price';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    link: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::cabinet-type-surcharge-link.cabinet-type-surcharge-link'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge-price.cabinet-type-surcharge-price'
+    > &
+      Schema.Attribute.Private;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceClass: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::price-class.price-class'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCabinetTypeSurchargeCabinetTypeSurcharge
   extends Struct.CollectionTypeSchema {
   collectionName: 'cabinet_type_surcharges';
@@ -582,14 +660,15 @@ export interface ApiCabinetTypeSurchargeCabinetTypeSurcharge
     draftAndPublish: true;
   };
   attributes: {
-    cabinetType: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::cabinet-type.cabinet-type'
-    >;
     code: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dimension: Schema.Attribute.Enumeration<['height', 'width', 'depth']>;
+    links: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-type-surcharge-link.cabinet-type-surcharge-link'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -597,11 +676,11 @@ export interface ApiCabinetTypeSurchargeCabinetTypeSurcharge
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    value: Schema.Attribute.Decimal;
   };
 }
 
@@ -650,9 +729,9 @@ export interface ApiCabinetTypeCabinetType extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::subcategory.subcategory'
     >;
-    typeSurcharges: Schema.Attribute.Relation<
+    surchargeLinks: Schema.Attribute.Relation<
       'oneToMany',
-      'api::cabinet-type-surcharge.cabinet-type-surcharge'
+      'api::cabinet-type-surcharge-link.cabinet-type-surcharge-link'
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -720,6 +799,10 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cabinetSeries: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cabinet-serie.cabinet-serie'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1485,6 +1568,8 @@ declare module '@strapi/strapi' {
       'api::cabinet-accessory.cabinet-accessory': ApiCabinetAccessoryCabinetAccessory;
       'api::cabinet-price.cabinet-price': ApiCabinetPriceCabinetPrice;
       'api::cabinet-serie.cabinet-serie': ApiCabinetSerieCabinetSerie;
+      'api::cabinet-type-surcharge-link.cabinet-type-surcharge-link': ApiCabinetTypeSurchargeLinkCabinetTypeSurchargeLink;
+      'api::cabinet-type-surcharge-price.cabinet-type-surcharge-price': ApiCabinetTypeSurchargePriceCabinetTypeSurchargePrice;
       'api::cabinet-type-surcharge.cabinet-type-surcharge': ApiCabinetTypeSurchargeCabinetTypeSurcharge;
       'api::cabinet-type.cabinet-type': ApiCabinetTypeCabinetType;
       'api::cabinet-variant.cabinet-variant': ApiCabinetVariantCabinetVariant;

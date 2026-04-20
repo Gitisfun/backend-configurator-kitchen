@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_type_surcharge_prices",
+  "info": {
+    "singularName": "cabinet-type-surcharge-price",
+    "pluralName": "cabinet-type-surcharge-prices",
+    "displayName": "Cabinet Type Surcharge Price"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "link": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-type-surcharge-link.cabinet-type-surcharge-link",
+      "inversedBy": "prices"
+    },
+    "priceClass": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::price-class.price-class"
+    }
+  }
+}

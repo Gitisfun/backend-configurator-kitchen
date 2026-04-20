@@ -35,6 +35,12 @@
       "relation": "manyToOne",
       "target": "api::subcategory.subcategory",
       "inversedBy": "cabinetSeries"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "cabinetSeries"
     }
   }
 }

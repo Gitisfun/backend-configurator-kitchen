@@ -65,10 +65,10 @@
       "target": "api::depth-option.depth-option",
       "mappedBy": "cabinetTypes"
     },
-    "typeSurcharges": {
+    "surchargeLinks": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::cabinet-type-surcharge.cabinet-type-surcharge",
+      "target": "api::cabinet-type-surcharge-link.cabinet-type-surcharge-link",
       "mappedBy": "cabinetType"
     }
   }

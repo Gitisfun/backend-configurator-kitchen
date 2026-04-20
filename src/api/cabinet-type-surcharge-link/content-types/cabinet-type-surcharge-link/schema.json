@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cabinet_type_surcharge_links",
+  "info": {
+    "singularName": "cabinet-type-surcharge-link",
+    "pluralName": "cabinet-type-surcharge-links",
+    "displayName": "Cabinet Type Surcharge Link"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cabinetType": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-type.cabinet-type",
+      "inversedBy": "surchargeLinks"
+    },
+    "surcharge": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cabinet-type-surcharge.cabinet-type-surcharge",
+      "inversedBy": "links"
+    },
+    "prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cabinet-type-surcharge-price.cabinet-type-surcharge-price",
+      "mappedBy": "link"
+    }
+  }
+}
