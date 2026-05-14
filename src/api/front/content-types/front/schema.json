@@ -15,6 +15,9 @@
       "type": "string",
       "required": true
     },
+    "code": {
+      "type": "string"
+    },
     "image": {
       "type": "media",
       "multiple": false,

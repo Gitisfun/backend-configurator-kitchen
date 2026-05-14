@@ -15,14 +15,16 @@
       "type": "string",
       "required": true
     },
+    "code": {
+      "type": "string"
+    },
     "image": {
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
     },
     "color": {
-      "type": "string",
-      "default": "white"
+      "type": "string"
     },
     "price": {
       "type": "decimal"

@@ -15,6 +15,16 @@
       "type": "string",
       "required": true
     },
+    "value": {
+      "type": "string",
+      "maxLength": 128,
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
     "cabinetSeries": {
       "type": "relation",
       "relation": "oneToMany",

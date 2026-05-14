@@ -441,7 +441,8 @@ export interface ApiBackBack extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    color: Schema.Attribute.String & Schema.Attribute.DefaultTo<'white'>;
+    code: Schema.Attribute.String;
+    color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -545,13 +546,11 @@ export interface ApiCabinetSerieCabinetSerie
   attributes: {
     carcaseHeight: Schema.Attribute.Integer;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    code: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     defaultCarcaseDepth: Schema.Attribute.Integer;
+    image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -817,6 +816,15 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    value: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 128;
+      }>;
   };
 }
 
@@ -867,6 +875,7 @@ export interface ApiFrontFront extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    code: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -902,6 +911,7 @@ export interface ApiHandlePositionHandlePosition
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    handles: Schema.Attribute.Relation<'manyToMany', 'api::handle.handle'>;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -928,15 +938,21 @@ export interface ApiHandleHandle extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    catalogSubtype: Schema.Attribute.String;
+    catalogType: Schema.Attribute.String;
+    code: Schema.Attribute.String;
     color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    handlePosition: Schema.Attribute.Relation<
-      'manyToOne',
+    description: Schema.Attribute.Text;
+    handlePositions: Schema.Attribute.Relation<
+      'manyToMany',
       'api::handle-position.handle-position'
     >;
+    handlePostions: Schema.Attribute.String;
     hasHold: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    height: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -948,6 +964,7 @@ export interface ApiHandleHandle extends Struct.CollectionTypeSchema {
     position: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
+    surchargeDisplay: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -965,6 +982,7 @@ export interface ApiPlinthPlinth extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    code: Schema.Attribute.String;
     color: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1046,6 +1064,39 @@ export interface ApiSubcategorySubcategory extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::subcategory.subcategory'
     >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWorktopWorktop extends Struct.CollectionTypeSchema {
+  collectionName: 'worktops';
+  info: {
+    displayName: 'Worktop';
+    pluralName: 'worktops';
+    singularName: 'worktop';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::worktop.worktop'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    note: Schema.Attribute.Text;
+    price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1581,6 +1632,7 @@ declare module '@strapi/strapi' {
       'api::plinth.plinth': ApiPlinthPlinth;
       'api::price-class.price-class': ApiPriceClassPriceClass;
       'api::subcategory.subcategory': ApiSubcategorySubcategory;
+      'api::worktop.worktop': ApiWorktopWorktop;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

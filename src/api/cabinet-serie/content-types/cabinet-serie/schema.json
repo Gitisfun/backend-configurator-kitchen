@@ -15,11 +15,6 @@
       "type": "string",
       "required": true
     },
-    "code": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "carcaseHeight": {
       "type": "integer"
     },
@@ -29,6 +24,11 @@
     "productLine": {
       "type": "enumeration",
       "enum": ["standard", "cLine", "xLine"]
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
     },
     "subcategory": {
       "type": "relation",

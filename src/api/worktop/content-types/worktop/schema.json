@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "plinths",
+  "collectionName": "worktops",
   "info": {
-    "singularName": "plinth",
-    "pluralName": "plinths",
-    "displayName": "Plinth"
+    "singularName": "worktop",
+    "pluralName": "worktops",
+    "displayName": "Worktop"
   },
   "options": {
     "draftAndPublish": true
@@ -18,16 +18,19 @@
     "code": {
       "type": "string"
     },
-    "price": {
-      "type": "decimal"
+    "note": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
     },
     "image": {
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
     },
-    "color": {
-      "type": "string"
+    "price": {
+      "type": "decimal"
     }
   }
 }

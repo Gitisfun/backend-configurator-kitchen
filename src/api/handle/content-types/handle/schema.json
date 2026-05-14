@@ -34,10 +34,32 @@
       "type": "integer",
       "default": 0
     },
-    "handlePosition": {
+    "code": {
+      "type": "string"
+    },
+    "handlePostions": {
+      "type": "string"
+    },
+    "height": {
+      "type": "string"
+    },
+    "surchargeDisplay": {
+      "type": "string"
+    },
+    "catalogType": {
+      "type": "string"
+    },
+    "catalogSubtype": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "handlePositions": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::handle-position.handle-position"
+      "relation": "manyToMany",
+      "target": "api::handle-position.handle-position",
+      "mappedBy": "handles"
     }
   }
 }

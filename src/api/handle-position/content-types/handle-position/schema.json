@@ -19,6 +19,12 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": ["images"]
+    },
+    "handles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::handle.handle",
+      "inversedBy": "handlePositions"
     }
   }
 }
